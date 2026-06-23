@@ -6,6 +6,7 @@ export interface Project {
   tags: string[];
   link?: string;
   features: string[];
+  image?: string;
 }
 
 export interface Experience {

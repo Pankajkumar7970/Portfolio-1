@@ -6,19 +6,19 @@ import { PERSONAL_INFO } from '../constants';
 const Hero: React.FC = () => {
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cream pt-20">
-      
+
       {/* Background Decorative Blobs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             rotate: 360,
             scale: [1, 1.1, 1],
           }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute -top-[10%] -right-[10%] w-[600px] h-[600px] bg-gold/5 rounded-full blur-3xl"
         />
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             rotate: -360,
             x: [0, 50, 0],
           }}
@@ -28,18 +28,8 @@ const Hero: React.FC = () => {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="inline-block border border-gold/50 rounded-full px-4 py-1 mb-8"
-        >
-          <span className="text-xs font-bold tracking-[0.2em] text-gold uppercase">
-            Portfolio • 2024
-          </span>
-        </motion.div>
 
-        <motion.h1 
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -48,7 +38,7 @@ const Hero: React.FC = () => {
           Pankaj <span className="italic text-gold">Kumar</span>
         </motion.h1>
 
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
@@ -57,7 +47,7 @@ const Hero: React.FC = () => {
           {PERSONAL_INFO.role}
         </motion.p>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -76,8 +66,9 @@ const Hero: React.FC = () => {
           className="flex flex-col items-center gap-4"
         >
           <span className="text-xs tracking-widest uppercase text-charcoal/40">Discover</span>
-          <a 
-            href="#simulation" 
+          <a
+            href="#simulation"
+            aria-label="Scroll to simulation section"
             className="w-10 h-10 border border-charcoal/20 rounded-full flex items-center justify-center hover:border-gold hover:text-gold transition-colors animate-bounce"
           >
             <ArrowDown size={16} />

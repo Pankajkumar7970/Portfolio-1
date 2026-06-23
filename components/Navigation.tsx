@@ -14,6 +14,20 @@ const Navigation: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, href: string) => {
+    // Only intercept anchor links that start with #
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const targetId = href.substring(1);
+      const elem = document.getElementById(targetId);
+      if (elem) {
+        elem.scrollIntoView({ behavior: 'smooth' });
+      }
+      // Close mobile menu if it's open
+      setIsOpen(false);
+    }
+  };
+
   const navLinks = [
     { name: "Introduction", href: "#hero" },
     { name: "Simulation", href: "#simulation" },
@@ -24,11 +38,10 @@ const Navigation: React.FC = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-cream/90 backdrop-blur-md shadow-sm py-4"
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled
+          ? "bg-cream/80 backdrop-blur-lg shadow-sm py-4"
           : "bg-transparent py-6"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#" className="flex items-center gap-2 group">
@@ -46,20 +59,22 @@ const Navigation: React.FC = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => handleSmoothScroll(e, link.href)}
               className="text-sm uppercase tracking-widest text-charcoal/70 hover:text-gold transition-colors font-medium"
             >
               {link.name}
             </a>
           ))}
-          <button className="bg-charcoal text-white px-6 py-2 rounded-full font-medium text-sm hover:bg-gold transition-colors flex items-center gap-2">
+          <a href="/Pankaj_Kumar_Resume.pdf" target="_blank" rel="noopener noreferrer" className="bg-charcoal text-white px-6 py-2 rounded-full font-medium text-sm hover:bg-gold transition-colors flex items-center gap-2">
             <span>Resume</span>
             <Download size={14} />
-          </button>
+          </a>
         </div>
 
         {/* Mobile Toggle */}
         <button
           className="md:hidden text-charcoal"
+          aria-label="Toggle mobile menu"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X /> : <Menu />}
@@ -80,14 +95,14 @@ const Navigation: React.FC = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => handleSmoothScroll(e, link.href)}
                   className="text-lg font-serif text-charcoal hover:text-gold"
                 >
                   {link.name}
                 </a>
               ))}
               <a
-                href="#"
+                href="/Pankaj_Kumar_Resume.pdf" target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gold font-medium mt-4"
               >
                 Download Resume <Download size={16} />
